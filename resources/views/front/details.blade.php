@@ -95,7 +95,7 @@
                         </div>
 
                         <a href="{{ route('front.learning', [$course, 'courseVideoId' => $video->id]) }}">
-                            <p class="font-semibold group-hover:text-white transition-all duration-300">{{ $video->name }}</p>
+                            <p class="font-semibold group-hover:text-white transition-all duration-300 line-clamp-2">{{ $video->name }}</p>
                         </a>
                     </div>
 

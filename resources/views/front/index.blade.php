@@ -7,6 +7,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <!-- CSS -->
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
 <body class="text-black font-poppins pt-10 pb-[50px]">
     <div id="hero-section" class="max-w-[1200px] mx-auto w-full flex flex-col gap-10 pb-[50px] bg-[url('assets/background/Hero-Banner.png')] bg-center bg-no-repeat bg-cover rounded-[32px] overflow-hidden">
@@ -64,8 +69,8 @@
                     your skills and build outstanding portfolio to tackle job interviews</p>
             </div>
             <div class="flex gap-6 w-fit">
-                <a href="" class="text-white font-semibold rounded-[30px] p-[16px_32px] bg-[#FF6129] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FF612980]">Explore Courses</a>
-                <a href="" class="text-white font-semibold rounded-[30px] p-[16px_32px] ring-1 ring-white transition-all duration-300 hover:ring-2 hover:ring-[#FF6129]">Career Guidance</a>
+                <a href="#Top-Categories" class="text-white font-semibold rounded-[30px] p-[16px_32px] bg-[#FF6129] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FF612980]">Explore Courses</a>
+                <a href="#Popular-Courses" class="text-white font-semibold rounded-[30px] p-[16px_32px] ring-1 ring-white transition-all duration-300 hover:ring-2 hover:ring-[#FF6129]">Career Guidance</a>
             </div>
         </div>
         <div class="flex gap-[70px] items-center justify-center">
@@ -100,52 +105,17 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-4 gap-[30px]">
-            <a href="{{ route('front.category' ,  'software-development') }}" class="card flex items-center p-4 gap-3 ring-1 ring-[#DADEE4] rounded-2xl hover:ring-2 hover:ring-[#FF6129] transition-all duration-300">
+        <div style="width: 1000px; flex-wrap: wrap; margin-inline: auto;" class="flex justify-center items-center gap-[30px]">
+            @forelse ($categories as $category)
+            <a href="{{ route('front.category' ,  $category->slug) }}" class="card flex items-center p-4 gap-3 ring-1 ring-[#DADEE4] rounded-2xl hover:ring-2 hover:ring-[#FF6129] transition-all duration-300">
                 <div class="w-[70px] h-[70px] flex shrink-0">
-                    <img src="assets/icon/Web Development 1.svg" class="object-contain" alt="icon">
+                    <img src="{{Storage::url($category->icon)}}" class="object-contain" alt="icon">
                 </div>
-                <p class="font-bold text-lg">Software Development</p>
+                <p class="font-bold text-lg">{{ $category->name }}</p>
             </a>
-            <a href="{{ route('front.category' ,  'digital-marketing') }}" class="card flex items-center p-4 gap-3 ring-1 ring-[#DADEE4] rounded-2xl hover:ring-2 hover:ring-[#FF6129] transition-all duration-300">
-                <div class="w-[70px] h-[70px] flex shrink-0">
-                    <img src="assets/icon/Web Development 1-1.svg" class="object-contain" alt="icon">
-                </div>
-                <p class="font-bold text-lg">Digital Marketing</p>
-            </a>
-            <a href="{{ route('front.category' ,  'business-intelligence') }}" class="card flex items-center p-4 gap-3 ring-1 ring-[#DADEE4] rounded-2xl hover:ring-2 hover:ring-[#FF6129] transition-all duration-300">
-                <div class="w-[70px] h-[70px] flex shrink-0">
-                    <img src="assets/icon/Web Development 1-2.svg" class="object-contain" alt="icon">
-                </div>
-                <p class="font-bold text-lg">Business Intelligence</p>
-            </a>
-            <a href="{{ route('front.category' ,  'freelancing-journey') }}" class="card flex items-center p-4 gap-3 ring-1 ring-[#DADEE4] rounded-2xl hover:ring-2 hover:ring-[#FF6129] transition-all duration-300">
-                <div class="w-[70px] h-[70px] flex shrink-0">
-                    <img src="assets/icon/Web Development 1-3.svg" class="object-contain" alt="icon">
-                </div>
-                <p class="font-bold text-lg">Freelancing Journey</p>
-            </a>
-        </div>
-
-        <div class="grid grid-cols-3 gap-[30px]">
-            <a href="{{ route('front.category' ,  'product-customer-data-analytics') }}" class="card flex items-center p-4 gap-3 ring-1 ring-[#DADEE4] rounded-2xl hover:ring-2 hover:ring-[#FF6129] transition-all duration-300">
-                <div class="w-[70px] h-[70px] flex shrink-0">
-                    <img src="assets/icon/Web Development 1-1.svg" class="object-contain" alt="icon">
-                </div>
-                <p class="font-bold text-lg">Product & Customer Data Analytics</p>
-            </a>
-            <a href="{{ route('front.category' ,  'ux-design-copywriting') }}" class="card flex items-center p-4 gap-3 ring-1 ring-[#DADEE4] rounded-2xl hover:ring-2 hover:ring-[#FF6129] transition-all duration-300">
-                <div class="w-[70px] h-[70px] flex shrink-0">
-                    <img src="assets/icon/Web Development 1-4.svg" class="object-contain" alt="icon">
-                </div>
-                <p class="font-bold text-lg">UX Design <br> Copywriting</p>
-            </a>
-            <a href="{{ route('front.category' ,  'software-quality-assurance') }}" class="card flex items-center p-4 gap-3 ring-1 ring-[#DADEE4] rounded-2xl hover:ring-2 hover:ring-[#FF6129] transition-all duration-300">
-                <div class="w-[70px] h-[70px] flex shrink-0">
-                    <img src="assets/icon/Web Development 1.svg" class="object-contain" alt="icon">
-                </div>
-                <p class="font-bold text-lg">Software Quality Assurance</p>
-            </a>
+            @empty
+                <p class="text-center text-slate-500 text-lg">No categories found.</p>
+            @endforelse
         </div>
     </section>
 
@@ -260,7 +230,7 @@
         <div class="flex flex-col text-left gap-[30px]">
             <h2 class="font-bold text-[36px] leading-[52px]">Learn From Anywhere,<br>Anytime You Want</h2>
             <p class="text-[#475466] text-lg leading-[34px]">Growing new skills would be more flexible without <br> limit we help you to access all course materials.</p>
-            <a href="" class="text-white font-semibold rounded-[30px] p-[16px_32px] bg-[#FF6129] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FF612980] w-fit">Check Pricing</a>
+            <a href="{{ route('front.pricing') }}" class="text-white font-semibold rounded-[30px] p-[16px_32px] bg-[#FF6129] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FF612980] w-fit">Check Pricing</a>
         </div>
     </section>
     <section id="Zero-to-Success" class="max-w-[1200px] mx-auto flex flex-col py-[70px] px-[50px] gap-[30px] bg-[#F5F8FA] rounded-[32px]">
